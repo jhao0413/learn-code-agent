@@ -1,0 +1,32 @@
+{
+
+  "name": "js-agent",
+
+  "version": "1.0.0",
+
+  "description": "Learn Claude Code — JavaScript port. Build an AI coding agent harness step by step.",
+
+  "type": "module",
+
+  "scripts": {
+
+    "s01": "node --no-warnings s01_agent_loop/code.js"
+
+  },
+
+  "dependencies": {
+
+    "@anthropic-ai/sdk": "^0.98.0",
+
+    "@inquirer/prompts": "^8.5.2",
+
+    "dotenv": "^16.4.0",
+
+    "execa": "^9.6.1",
+
+    "js-yaml": "^4.1.0"
+
+  }
+
+}
+
