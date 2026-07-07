@@ -26,6 +26,11 @@ const TOOLS = [
 ];
 
 // ── 工具执行 ────────────────────────────────────────
+const toolHandlers = {
+  bash: runBash,
+  // 新增工具在这里加一行
+};
+
 async function runBash(command) {
   const dangerous = ["rm -rf /", "sudo", "shutdown", "reboot", "> /dev/"];
   if (dangerous.some((d) => command.includes(d))) {
@@ -66,16 +71,25 @@ async function agentLoop(messages) {
 
     const results = [];
     for (const block of response.content) {
-      if (block.type === "tool_use") {
-        process.stdout.write(`\x1b[33m$ ${block.input.command}\x1b[0m\n`);
-        const output = await runBash(block.input.command);
-        process.stdout.write(`${output.slice(0, 200)}\n`);
+      if (block.type !== "tool_use") continue;
+
+      const handler = toolHandlers[block.name];
+      if (!handler) {
         results.push({
           type: "tool_result",
           tool_use_id: block.id,
-          content: output,
+          content: `Error: Unknown tool "${block.name}"`,
         });
+        continue;
       }
+
+      const output = await handler(block.input);
+      process.stdout.write(`${output.slice(0, 200)}\n`);
+      results.push({
+        type: "tool_result",
+        tool_use_id: block.id,
+        content: output,
+      });
     }
 
     messages.push({ role: "user", content: results });
