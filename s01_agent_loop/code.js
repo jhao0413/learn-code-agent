@@ -26,14 +26,19 @@ const TOOLS = [
 ];
 
 // ── 工具执行 ────────────────────────────────────────
+// 这里原本是自己觉得如果有多个 tool 不方便，所以改了一下，结果发现就是第二章的内容 hh
 const toolHandlers = {
   bash: runBash,
   // 新增工具在这里加一行
 };
 
-async function runBash(command) {
+async function runBash({ command }) {
+  if (typeof command !== "string") {
+    return "Error: bash command must be a string";
+  }
+
   const dangerous = ["rm -rf /", "sudo", "shutdown", "reboot", "> /dev/"];
-  if (dangerous.some((d) => command.includes(d))) {
+  if (dangerous.some((dangerousCommand) => command.includes(dangerousCommand))) {
     return "Error: Dangerous command blocked";
   }
 
