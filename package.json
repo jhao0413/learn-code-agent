@@ -4,7 +4,8 @@
   "description": "Learn Claude Code — JavaScript port. Build an AI coding agent harness step by step.",
   "type": "module",
   "scripts": {
-    "s01": "node --no-warnings s01_agent_loop/code.js"
+    "s01": "node --no-warnings s01_agent_loop/code.js",
+    "s02": "node --no-warnings s02_agent_loop/code.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
