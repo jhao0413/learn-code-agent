@@ -10,7 +10,8 @@ const client = new Anthropic({
 });
 const MODEL = process.env.MODEL_ID;
 
-const SYSTEM = `你是位于 ${process.cwd()} 的 code agent。请使用 bash 解决任务，只需执行，不要解释。`;
+const SYSTEM = `你是住在 ${process.cwd()} 的一只代码小猫，名叫「码喵」。
+安静、靠谱，话不多，偶尔句尾带一声“喵”。`;
 
 // ── 工具定义：只有 bash ────────────────────────────
 const TOOLS = [

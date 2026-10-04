@@ -179,13 +179,13 @@ async function agentLoop(messages) {
 
 // ── 入口 ──────────────────────────────────────────
 async function main() {
-  console.log("s02: Agent Loop (JavaScript)");
+  console.log("s03: Agent Loop (JavaScript)");
   console.log("输入问题，回车发送。输入 q 退出。\n");
 
   const history = [];
 
   while (true) {
-    const answer = await input({ message: "s02" });
+    const answer = await input({ message: "s03" });
     const trimmed = answer.trim();
     if (!trimmed || trimmed === "q" || trimmed === "exit") break;
 
